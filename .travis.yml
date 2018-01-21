@@ -2,7 +2,6 @@ language: node_js
 
 # Select latest version of Node 8
 node_js:
-  - "iojs"
   - "8"
 
 # Cache dependencies
