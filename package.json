@@ -4,7 +4,10 @@
   "description": "File sync and share cloud API",
   "main": "app/main.js",
   "scripts": {
+    "start": "node app/main.js",
+    "watch": "nodemon",
     "test": "standard && jest",
+    "testwatch": "jest --watch --coverage",
     "coverage": "standard && jest --coverage"
   },
   "repository": {
@@ -31,9 +34,13 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-validator": "^4.3.0",
-    "js-yaml": "^3.10.0"
+    "fs-extra": "^5.0.0",
+    "js-yaml": "^3.10.0",
+    "mongodb": "^3.0.1"
   },
   "standard": {
-    "env": [ "jest" ]
+    "env": [
+      "jest"
+    ]
   }
 }
