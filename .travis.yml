@@ -15,4 +15,7 @@ install:
   - npm install --save codacy-coverage
 
 script:
-  - ./node_modules/jest/bin/jest.js --coverage | ./node_modules/.bin/codacy-coverage
+  - npm run coverage
+
+after_success:
+  - cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage
