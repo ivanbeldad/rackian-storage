@@ -1,0 +1,39 @@
+{
+  "name": "api-rackian",
+  "version": "0.0.1",
+  "description": "File sync and share cloud API",
+  "main": "app/main.js",
+  "scripts": {
+    "test": "standard && jest",
+    "coverage": "standard && jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivandelabeldad/api-rackian.git"
+  },
+  "keywords": [
+    "api",
+    "cloud",
+    "rackian"
+  ],
+  "author": "Ivan de la Beldad <ivandelabeldad@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ivandelabeldad/api-rackian/issues"
+  },
+  "homepage": "https://github.com/ivandelabeldad/api-rackian#readme",
+  "devDependencies": {
+    "jest": "^22.1.4",
+    "nodemon": "^1.14.11",
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-validator": "^4.3.0",
+    "js-yaml": "^3.10.0"
+  },
+  "standard": {
+    "env": [ "jest" ]
+  }
+}
