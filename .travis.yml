@@ -1,0 +1,18 @@
+language: node_js
+
+# Select latest version of Node 8
+node_js:
+  - "iojs"
+  - "8"
+
+# Cache dependencies
+cache:
+  directories:
+    - "node_modules"
+
+install:
+  - npm install
+  - npm install --save codacy-coverage
+
+script:
+  - ./node_modules/jest/bin/jest.js --coverage | ./node_modules/.bin/codacy-coverage
