@@ -7,9 +7,13 @@ const configLoader = require('./configLoader')
 
 fs.readFile = jest.fn(async () => {
   return jsYaml.dump({
-    dev: { hello: 'world' },
-    prod: {}
+    development: { hello: 'world' },
+    production: {}
   })
+})
+
+beforeEach(() => {
+  process.env.NODE_ENV = 'development'
 })
 
 describe('config loader', () => {
@@ -19,12 +23,14 @@ describe('config loader', () => {
     expect(fs.readFile.mock.calls[0][0]).toBe('./app/config.yml')
   })
 
-  it('shouldn\'t throw errors passing either prod or dev', async () => {
-    await expect(configLoader('prod')).resolves.toBeDefined()
-    await expect(configLoader('dev')).resolves.toBeDefined()
-  })
-  it('should throw error if value is passed but prod or env', async () => {
-    await expect(configLoader('another')).rejects.toThrowError('env must be either dev or prod')
+  it('shouldn\'t throw errors passing either production or development', async () => {
+    process.env.NODE_ENV = 'production'
+    await expect(configLoader()).resolves.toBeDefined()
+    process.env.NODE_ENV = 'development'
+    await expect(configLoader()).resolves.toBeDefined()
+    process.env.NODE_ENV = 'another'
+    await expect(configLoader()).rejects
+      .toThrowError('NODE_ENV must be either development or production')
   })
 
   it('should return an object with the configuration', async () => {

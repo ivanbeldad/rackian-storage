@@ -1,13 +1,13 @@
-dev:
-  url:
+development:
+  url: ''
   port:
   db:
-    uri:
-    dbName:
+    uri: ''
+    dbName: ''
 
-prod:
-  url:
+production:
+  url: ''
   port:
-  db:
-    uri:
-    dbName:
+  db: ''
+    uri: ''
+    dbName: ''
