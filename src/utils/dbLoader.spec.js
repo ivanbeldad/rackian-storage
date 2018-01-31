@@ -1,9 +1,25 @@
 require('jest')
 
+// MongoDB Mock
 jest.mock('mongodb')
 const { MongoClient } = require('mongodb')
-const dbloader = require('./dbLoader')
-const config = {
+
+// Config Mock
+jest.mock('./configLoader', () => {
+  return () => {
+    return new Promise(resolve => {
+      resolve({
+        db: {
+          uri: 'uri',
+          dbName: 'dbName'
+        }
+      })
+    })
+  }
+})
+
+const dbLoader = require('./dbLoader')
+const conf = {
   db: {
     uri: 'uri',
     dbName: 'dbName'
@@ -12,20 +28,20 @@ const config = {
 const dbMethod = jest.fn()
 MongoClient.connect = jest.fn(async () => Promise.resolve({ db: dbMethod }))
 
-describe('dbloader', () => {
+describe('dbLoader', () => {
   it('should call MongoClient.connect', async () => {
-    await dbloader(config)
+    await dbLoader
     expect(MongoClient.connect.mock.calls.length).toBe(1)
   })
 
   it('should call connect using uri from config', async () => {
-    await dbloader(config)
+    await dbLoader
     const currentCall = MongoClient.connect.mock.calls.length - 1
-    expect(MongoClient.connect.mock.calls[currentCall][0]).toBe(config.db.uri)
+    expect(MongoClient.connect.mock.calls[currentCall][0]).toBe(conf.db.uri)
   })
 
   it('should select dbName from config', async () => {
-    await dbloader(config)
-    expect(dbMethod.mock.calls[0][0]).toBe(config.db.dbName)
+    await dbLoader
+    expect(dbMethod.mock.calls[0][0]).toBe(conf.db.dbName)
   })
 })
