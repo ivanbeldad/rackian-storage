@@ -18,8 +18,20 @@ const logger = {
         colorize: true
       })
     ]
+  }),
+
+  test: new winston.Logger({
+    level: 'silly',
+    timestamp: true,
+    transports: [
+      new winston.transports.Console({
+        timestamp: true,
+        prettyPrint: true,
+        colorize: true
+      })
+    ]
   })
 
 }
 
-module.exports = logger[process.env.NODE_ENV]
+module.exports = logger[process.env.NODE_ENV || 'development']
