@@ -59,4 +59,4 @@ typings/
 
 .vscode
 
-app/config.yml
+src/config.yml

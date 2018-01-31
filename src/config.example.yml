@@ -1,13 +1,15 @@
 development:
-  url: ''
-  port:
+  api:
+    uri: ''
+    port:
   db:
     uri: ''
     dbName: ''
 
 production:
-  url: ''
-  port:
-  db: ''
+  api:
+    uri: ''
+    port:
+  db:
     uri: ''
     dbName: ''
