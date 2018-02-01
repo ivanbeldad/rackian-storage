@@ -2,14 +2,13 @@
   "name": "api-rackian",
   "version": "0.0.1",
   "description": "File sync and share cloud API",
-  "main": "app/main.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "node app/main.js",
+    "start": "node src/main.js",
     "watch": "nodemon",
     "test": "standard && jest",
-    "testwatch": "jest --watch",
-    "coverage": "standard && jest --coverage",
-    "coveragewatch": "jest --watch --coverage"
+    "watchtest": "jest --watch",
+    "coverage": "standard && jest --coverage"
   },
   "repository": {
     "type": "git",
