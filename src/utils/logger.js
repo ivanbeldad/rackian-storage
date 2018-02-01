@@ -1,6 +1,6 @@
 const winston = require('winston')
 
-const logger = {
+const loggers = {
 
   production: new winston.Logger({
     level: 'info',
@@ -21,7 +21,7 @@ const logger = {
   }),
 
   test: new winston.Logger({
-    level: 'silly',
+    level: 'debug',
     timestamp: true,
     transports: [
       new winston.transports.Console({
@@ -34,4 +34,20 @@ const logger = {
 
 }
 
-module.exports = logger[process.env.NODE_ENV || 'development']
+/**
+ * @typedef {Object} Logger
+ * @property {function(string, string)} log
+ * @property {function(string)} error
+ * @property {function(string)} warn
+ * @property {function(string)} info
+ * @property {function(string)} verbose
+ * @property {function(string)} debug
+ * @property {function(string)} silly
+*/
+
+/**
+ * @type {Logger}
+ */
+let logger = loggers[process.env.NODE_ENV || 'development']
+
+module.exports = logger
