@@ -6,23 +6,21 @@ const { MongoClient } = require('mongodb')
 
 // Config Mock
 jest.mock('./configLoader', () => {
-  return () => {
-    return new Promise(resolve => {
-      resolve({
-        db: {
-          uri: 'uri',
-          dbName: 'dbName'
-        }
-      })
+  return new Promise(resolve => {
+    resolve({
+      db: {
+        uri: 'uri',
+        dbName: 'testDb'
+      }
     })
-  }
+  })
 })
 
 const dbLoader = require('./dbLoader')
 const conf = {
   db: {
     uri: 'uri',
-    dbName: 'dbName'
+    dbName: 'testDb'
   }
 }
 const dbMethod = jest.fn()
