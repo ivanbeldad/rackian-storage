@@ -9,7 +9,7 @@ const getCredentials = (encoded) => {
   return { username, password }
 }
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
   if (!req.get('Authentication')) {
     res.setHeader('WWW-Authenticate', 'Basic')
     res.status(401)
@@ -17,15 +17,16 @@ module.exports = (req, res, next) => {
     return next(new Error('Need authentication'))
   }
   const credentials = getCredentials(req.get('Authentication'))
-  userService.validate(credentials.username, credentials.password)
-    .then(user => {
-      if (!user) {
-        res.status(403)
-        logger.info('Invalid credentials')
-        return next(new Error('Invalid credentials'))
-      }
-      req.user = user
-      return next()
-    })
-    .catch(err => next(err))
+  try {
+    const user = await userService.validate(credentials.username, credentials.password)
+    if (!user) {
+      res.status(403)
+      logger.info('Invalid credentials')
+      return next(new Error('Invalid credentials'))
+    }
+    req.user = user
+    return next()
+  } catch (err) {
+    return next(err)
+  }
 }
