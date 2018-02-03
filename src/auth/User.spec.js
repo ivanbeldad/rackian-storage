@@ -37,8 +37,8 @@ describe('User', () => {
     expect(await user.isValid(`${pass}-other`)).toBeFalsy()
   })
 
-  it(`isValid should return false if either there is not password
-      as argument or as property`, async () => {
+  it(`isValid should return false if either there is not password \
+  as argument or as property`, async () => {
     const user = new User()
     expect(await user.isValid(pass)).toBeFalsy()
     user.password = pass

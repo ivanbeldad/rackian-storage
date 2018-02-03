@@ -19,9 +19,9 @@ const jsYaml = require('js-yaml')
  * @property {ConfigDB} db
  */
 
- /**
-  * @return {Promise<Config>}
-  */
+/**
+ * @return {Promise<Config>}
+ */
 module.exports = (async () => {
   let enviroment = process.env.NODE_ENV || 'development'
   const configContent = await fs.readFile('./src/config.yml')
