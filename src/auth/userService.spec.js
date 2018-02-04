@@ -7,9 +7,9 @@ const User = require('./User')
 User.prototype.isValid = jest.fn(paramPass => pass === paramPass)
 
 // DB MOCK
-jest.doMock('../utils/dbLoader', () => {
+jest.doMock('../utils/db', () => {
   return {
-    collection: () => {
+    load: () => {
       return {
         findOne: (username) => {
           if (username) {
@@ -24,7 +24,7 @@ jest.doMock('../utils/dbLoader', () => {
     }
   }
 })
-jest.mock('../utils/dbLoader.js')
+jest.mock('../utils/db.js')
 
 const userService = require('./userService')
 

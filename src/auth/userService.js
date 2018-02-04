@@ -1,11 +1,10 @@
-const dbLoader = require('../utils/dbLoader')
 const User = require('./User')
 const logger = require('../utils/logger')
+const db = require('../utils/db').load(User.collection)
 
 const getUser = async (username) => {
-  const db = await dbLoader
   try {
-    const userObject = db.collection(User.collection).findOne({ username })
+    const userObject = await db.findOne({ username })
     if (!Object.keys(userObject).length) {
       logger.debug(`Not user found with username ${username}`)
       return null
