@@ -1,9 +1,8 @@
-const configLoader = require('../utils/configLoader')
+const config = require('../utils/config').load()
 
-module.exports = async (req, res, next) => {
+module.exports = (req, res, next) => {
   req.pagination = {}
   req.pagination.page = req.query.page || 1
-  const config = await configLoader
   req.pagination.limit = req.query.pageSize || config.api.pageSize
   req.pagination.skip = (req.pagination.page - 1) * req.pagination.limit
   next()

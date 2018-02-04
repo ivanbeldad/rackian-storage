@@ -2,10 +2,14 @@ require('jest')
 
 const httpMocks = require('node-mocks-http')
 
-jest.mock('../utils/configLoader.js', () => {
+jest.mock('../utils/config.js', () => {
   return {
-    api: {
-      pageSize: 20
+    load: () => {
+      return {
+        api: {
+          pageSize: 20
+        }
+      }
     }
   }
 })
