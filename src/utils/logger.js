@@ -21,7 +21,7 @@ const loggers = {
   }),
 
   test: new winston.Logger({
-    level: 'debug',
+    level: 'none',
     timestamp: true,
     transports: [
       new winston.transports.Console({
