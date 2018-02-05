@@ -31,13 +31,15 @@ const collectionMethods = {
   save: jest.fn(() => {}),
   updateOne: jest.fn(() => {}),
   deleteOne: jest.fn(() => {}),
-  collection: jest.fn(() => {})
+  collection: jest.fn(() => {}),
+  createIndex: jest.fn(() => {})
 }
 const mongoDb = {
   collection: jest.fn(() => {
     return collectionMethods
   }),
-  close: jest.fn(() => {})
+  close: jest.fn(() => {}),
+  createCollection: jest.fn(() => {})
 }
 MongoClient.connect = jest.fn(async () => {
   return {
@@ -172,7 +174,15 @@ describe('Db', () => {
 
 // TODO
 describe('Init', () => {
-  it('', () => {
+  beforeAll(async () => {
+    await db.init()
+  })
 
+  it('Should create all collections', () => {
+    expect(mongoDb.createCollection).toHaveBeenCalledTimes(Object.keys(db.collection).length)
+  })
+
+  it('Should create indexes', () => {
+    expect(mongoDb.collection().createIndex).toHaveBeenCalledTimes(6)
   })
 })

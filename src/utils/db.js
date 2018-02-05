@@ -2,15 +2,28 @@ const { MongoClient, Db } = require('mongodb')
 const logger = require('./logger')
 const config = require('./config').load()
 
+const collection = {
+  User: 'users',
+  Folder: 'folders',
+  File: 'files'
+}
+
 /**
  * @type {Db}
  */
 let db = null
 
-// TODO
 const init = async () => {
   await connect()
-  // CREATE INDEXES
+  await Promise.all(Object.keys(collection).map(key => db.createCollection(collection[key])))
+  await Promise.all([
+    db.collection(collection.User).createIndex({ username: 1 }),
+    db.collection(collection.User).createIndex({ email: 1 }),
+    db.collection(collection.Folder).createIndex({ parentFolder: 1 }),
+    db.collection(collection.Folder).createIndex({ user: 1 }),
+    db.collection(collection.File).createIndex({ folder: 1 }),
+    db.collection(collection.File).createIndex({ user: 1 })
+  ])
 }
 
 const connect = async () => {
@@ -129,4 +142,4 @@ const load = (collection) => {
   }
 }
 
-module.exports = { init, connect, disconnect, load, database }
+module.exports = { init, connect, disconnect, load, database, collection }
