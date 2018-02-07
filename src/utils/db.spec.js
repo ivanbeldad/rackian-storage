@@ -1,20 +1,5 @@
 require('jest')
 
-// Config Mock
-const conf = {
-  db: {
-    uri: 'uri',
-    dbName: 'testDb'
-  }
-}
-jest.doMock('./config', () => {
-  return {
-    load: () => {
-      return conf
-    }
-  }
-})
-
 // MongoDB Mock
 jest.mock('mongodb')
 const { MongoClient } = require('mongodb')

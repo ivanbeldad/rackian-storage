@@ -1,6 +1,5 @@
 const { MongoClient, Db } = require('mongodb')
 const logger = require('./logger')
-const config = require('./config').load()
 
 const collection = {
   User: 'users',
@@ -27,15 +26,15 @@ const init = async () => {
 }
 
 const connect = async () => {
-  const client = await MongoClient.connect(config.db.uri)
-  const myDb = client.db(config.db.dbName)
-  logger.info(`Database ${config.db.dbName} loaded`)
+  const client = await MongoClient.connect(process.env.DB_URI)
+  const myDb = client.db(process.env.DB_NAME)
+  logger.info(`Database ${process.env.DB_NAME} loaded`)
   db = myDb
   return db
 }
 
 const disconnect = async () => {
-  logger.info(`Database ${config.db.dbName} disconnected`)
+  logger.info(`Database ${process.env.DB_NAME} disconnected`)
   return db.close()
 }
 

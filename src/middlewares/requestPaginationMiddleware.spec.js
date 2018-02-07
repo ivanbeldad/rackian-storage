@@ -1,18 +1,7 @@
 require('jest')
 
+require('dotenv').config()
 const httpMocks = require('node-mocks-http')
-
-jest.mock('../utils/config.js', () => {
-  return {
-    load: () => {
-      return {
-        api: {
-          pageSize: 20
-        }
-      }
-    }
-  }
-})
 
 const requestPaginationMiddleware = require('./requestPaginationMiddleware')
 

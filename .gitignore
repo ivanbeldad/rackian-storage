@@ -58,5 +58,3 @@ typings/
 .env
 
 .vscode
-
-src/config.yml
