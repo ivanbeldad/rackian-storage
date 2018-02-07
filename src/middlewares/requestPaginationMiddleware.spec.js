@@ -19,7 +19,7 @@ describe('Request pagination middleware', () => {
   it('req.pagination.page should be 1 if it is not defined in the query', done => {
     res.on('end', () => {
       try {
-        expect(req.pagination.page).toBe(1)
+        expect(req.pagination.getPage()).toBe(1)
         done()
       } catch (err) {
         done.fail(err)
@@ -32,7 +32,7 @@ describe('Request pagination middleware', () => {
     req.query.page = 5
     res.on('end', () => {
       try {
-        expect(req.pagination.page).toBe(5)
+        expect(req.pagination.getPage()).toBe(5)
         done()
       } catch (err) {
         done.fail(err)
@@ -44,7 +44,7 @@ describe('Request pagination middleware', () => {
   it('req.pagination.limit should be 20 if it is not defined in the query', done => {
     res.on('end', () => {
       try {
-        expect(req.pagination.limit).toBe(20)
+        expect(req.pagination.limit()).toBe(20)
         done()
       } catch (err) {
         done.fail(err)
@@ -57,7 +57,7 @@ describe('Request pagination middleware', () => {
     req.query.pageSize = 10
     res.on('end', () => {
       try {
-        expect(req.pagination.limit).toBe(10)
+        expect(req.pagination.limit()).toBe(10)
         done()
       } catch (err) {
         done.fail(err)
@@ -69,7 +69,7 @@ describe('Request pagination middleware', () => {
   it('req.pagination.skip should be 0 if page is 1', done => {
     res.on('end', () => {
       try {
-        expect(req.pagination.skip).toBe(0)
+        expect(req.pagination.skip()).toBe(0)
         done()
       } catch (err) {
         done.fail(err)
@@ -82,7 +82,7 @@ describe('Request pagination middleware', () => {
     req.query.page = 3
     res.on('end', () => {
       try {
-        expect(req.pagination.skip).toBe(40)
+        expect(req.pagination.skip()).toBe(40)
         done()
       } catch (err) {
         done.fail(err)
