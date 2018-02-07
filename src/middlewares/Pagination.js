@@ -29,7 +29,7 @@ class Pagination {
 }
 
 Pagination.firstPage = 1
-Pagination.pageSizeDefault = process.env.PAGE_SIZE_DEFAULT || 20
-Pagination.pageSizeMax = process.env.PAGE_SIZE_MAX || 100
+Pagination.pageSizeDefault = parseInt(process.env.PAGE_SIZE_DEFAULT) || 20
+Pagination.pageSizeMax = parseInt(process.env.PAGE_SIZE_MAX) || 100
 
 module.exports = Pagination

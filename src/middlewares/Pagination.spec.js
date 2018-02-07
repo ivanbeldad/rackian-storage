@@ -15,7 +15,7 @@ describe('Pagination', () => {
 
   it('Should set pageSize by default to Pagination.pageSize', () => {
     const pagination = new Pagination()
-    expect(pagination.getPageSize()).toBe(Pagination.pageSize)
+    expect(pagination.getPageSize()).toBe(Pagination.pageSizeDefault)
   })
 
   it('Pagesize should be 10 if 10 is passed', () => {
@@ -35,7 +35,7 @@ describe('Pagination', () => {
 
   it('Limit should be Pagination.maxPageSize if setted over Pagination.maxPageSize', () => {
     const pagination = new Pagination({ pageSize: 500 })
-    expect(pagination.limit()).toBe(Pagination.maxPageSize)
+    expect(pagination.limit()).toBe(Pagination.pageSizeMax)
   })
 
   it('Skip should return 20 if we are on second page with default size', () => {
