@@ -7,7 +7,7 @@ class Pagination {
    */
   constructor (opts = {}) {
     this.page = opts.page || Pagination.firstPage
-    this.pageSize = opts.pageSize || Pagination.pageSize
+    this.pageSize = opts.pageSize || Pagination.pageSizeDefault
   }
 
   getPage () {
@@ -19,7 +19,7 @@ class Pagination {
   }
 
   limit () {
-    if (this.pageSize > Pagination.maxPageSize) return Pagination.maxPageSize
+    if (this.pageSize > Pagination.pageSizeMax) return Pagination.pageSizeMax
     return this.pageSize
   }
 
@@ -29,7 +29,7 @@ class Pagination {
 }
 
 Pagination.firstPage = 1
-Pagination.pageSize = 20
-Pagination.maxPageSize = 100
+Pagination.pageSizeDefault = process.env.PAGE_SIZE_DEFAULT || 20
+Pagination.pageSizeMax = process.env.PAGE_SIZE_MAX || 100
 
 module.exports = Pagination
