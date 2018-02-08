@@ -1,10 +1,7 @@
-require('./utils/config').init()
-.then(() => {
-  return require('./utils/db').init()
-})
-.then(() => startServer())
+require('dotenv').config()
 
-const startServer = () => {
+require('./utils/db').init()
+.then(() => {
   const server = require('./server')
   server.start()
-}
+})
