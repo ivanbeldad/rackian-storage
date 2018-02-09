@@ -1,24 +1,11 @@
 version: '3'
 services:
-  api:
+  rackian-api:
     build:
       context: .
       args:
       - PORT
-    image: ivandelabeldad/rackian-api:1.0.0
-    environment:
-    - PORT
-    - PAGE_SIZE_DEFAULT
-    - PAGE_SIZE_MAX
-    - DB_URI
-    - DB_NAME
-  apitest:
-    build:
-      context: .
-      dockerfile: ./apitest/Dockerfile
-      args:
-      - PORT
-    image: ivandelabeldad/rackian-apitest:1.0.0
+    image: rackian-api
     environment:
     - PORT
     - PAGE_SIZE_DEFAULT

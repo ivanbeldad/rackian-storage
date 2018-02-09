@@ -6,10 +6,8 @@ ADD . /app
 
 WORKDIR /app
 
-RUN npm install --production
+RUN npm install --production --silent
 
-ARG PORT
-
-EXPOSE $PORT
+EXPOSE 10001
 
 CMD [ "npm", "start" ]
