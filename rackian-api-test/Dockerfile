@@ -10,6 +10,6 @@ RUN npm install --silent
 
 ARG PORT
 
-EXPOSE $PORT
+EXPOSE 10001
 
 CMD [ "npm", "test" ]
