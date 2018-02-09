@@ -1,5 +1,5 @@
 {
-  "name": "api-rackian",
+  "name": "rackian-api",
   "version": "0.0.1",
   "description": "File sync and share cloud API",
   "main": "src/main.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ivandelabeldad/api-rackian.git"
+    "url": "git+https://github.com/ivandelabeldad/rackian-api.git"
   },
   "keywords": [
     "api",
@@ -22,9 +22,9 @@
   "author": "Ivan de la Beldad <ivandelabeldad@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ivandelabeldad/api-rackian/issues"
+    "url": "https://github.com/ivandelabeldad/rackian-api/issues"
   },
-  "homepage": "https://github.com/ivandelabeldad/api-rackian#readme",
+  "homepage": "https://github.com/ivandelabeldad/rackian-api#readme",
   "devDependencies": {
     "jest": "^22.1.4",
     "nock": "^9.1.6",
