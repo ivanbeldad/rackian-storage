@@ -26,7 +26,7 @@ describe('Server', () => {
 
   it('Start should call listen on the correct port', async () => {
     server.start()
-    expect(app.listen).toBeCalledWith(process.env.PORT || 3000, expect.anything())
+    expect(app.listen).toBeCalledWith(process.env.PORT || 10001, expect.anything())
   })
 
   it('Stop should close application', async () => {
