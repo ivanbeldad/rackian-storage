@@ -4,10 +4,27 @@ language: node_js
 node_js:
   - "8"
 
+services:
+  # Enable docker
+  - docker
+
+addons:
+  apt:
+    packages:
+      # Get an updated version of docker
+      - docker-ce
+
 # Cache dependencies
 cache:
   directories:
-    - "node_modules"
+    - node_modules
+    - "$HOME/google-cloud-sdk/"
+
+before_install:
+  # Install gcloud and kubectl
+  - source $TRAVIS_BUILD_DIR/scripts/install.sh
+  # Auth gcloud and kubectl
+  - source $TRAVIS_BUILD_DIR/scripts/credentials.sh
 
 install:
   - npm install
@@ -17,4 +34,7 @@ script:
   - npm run coverage
 
 after_success:
+  # Send coverage to codacy
   - cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage
+  # Create container
+  # - docker-compose build rackian-api
