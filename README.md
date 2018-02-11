@@ -6,6 +6,8 @@
 [![Docker Automated build](https://img.shields.io/docker/automated/ivandelabeldad/rackian-api.svg?style=flat-square)](https://hub.docker.com/r/ivandelabeldad/rackian-api/)
 [![Known Vulnerabilities](https://snyk.io/test/github/ivandelabeldad/rackian-api/badge.svg?targetFile=package.json&style=flat-square)](https://snyk.io/test/github/ivandelabeldad/rackian-api?targetFile=package.json)
 [![Version](https://img.shields.io/badge/version-0.0.1-orange.svg?style=flat-square)](https://github.com/ivandelabeldad/rackian-api)
+[![Dependencies](https://img.shields.io/david/ivandelabeldad/rackian-api.svg?style=flat-square)](https://david-dm.org/ivandelabeldad/rackian-api)
+[![Dev Dependencies](https://img.shields.io/david/dev/ivandelabeldad/rackian-api.svg?style=flat-square)](https://david-dm.org/ivandelabeldad/rackian-api?type=dev)
 [![Codacy Badge](https://img.shields.io/codacy/coverage/26603995a736487896f5ea623d098e47.svg?style=flat-square)](https://www.codacy.com/app/ivandelabeldad/rackian-api?utm_source=github.com&utm_medium=referral&utm_content=ivandelabeldad/rackian-api&utm_campaign=Badge_Coverage)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat-square)](https://github.com/ivandelabeldad/rackian-api/blob/master/LICENSE)
 
