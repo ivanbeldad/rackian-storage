@@ -26,12 +26,14 @@ const mongoDb = {
   close: jest.fn(() => {}),
   createCollection: jest.fn(() => {})
 }
+const client = {
+  db: jest.fn(() => {
+    return mongoDb
+  }),
+  close: jest.fn()
+}
 MongoClient.connect = jest.fn(async () => {
-  return {
-    db: jest.fn(() => {
-      return mongoDb
-    })
-  }
+  return client
 })
 
 const db = require('./db')
@@ -57,9 +59,9 @@ describe('Db', () => {
     expect(db.database()).not.toBeNull()
   })
 
-  it('Disconnect should call db.close', async () => {
-    await db.disconnect()
-    expect(mongoDb.close).toHaveBeenCalledTimes(1)
+  it('Disconnect should call client.close', async () => {
+    await db.close()
+    expect(client.close).toHaveBeenCalledTimes(1)
   })
 
   it('Database should return the database', () => {

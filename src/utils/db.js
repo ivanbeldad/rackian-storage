@@ -7,9 +7,9 @@ const collection = {
   File: 'files'
 }
 
-/**
- * @type {Db}
- */
+/** @type {MongoClient} */
+let client = null
+/** @type {Db} */
 let db = null
 
 const init = async () => {
@@ -26,16 +26,22 @@ const init = async () => {
 }
 
 const connect = async () => {
-  const client = await MongoClient.connect(process.env.DB_URI)
-  const myDb = client.db(process.env.DB_NAME)
+  const myClient = await MongoClient.connect(process.env.DB_URI)
+  const myDb = myClient.db(process.env.DB_NAME)
   logger.info(`Database ${process.env.DB_NAME} loaded`)
   db = myDb
+  client = myClient
   return db
 }
 
-const disconnect = async () => {
-  logger.info(`Database ${process.env.DB_NAME} disconnected`)
-  return db.close()
+const close = async () => {
+  logger.info('Closing database connection...')
+  if (!client) {
+    logger.warn('Trying to close database, but it had not been openned')
+    return
+  }
+  await client.close()
+  logger.info('Database closed')
 }
 
 const checkConnection = () => {
@@ -141,4 +147,4 @@ const load = (collection) => {
   }
 }
 
-module.exports = { init, connect, disconnect, load, database, collection }
+module.exports = { init, connect, close, load, database, collection }
