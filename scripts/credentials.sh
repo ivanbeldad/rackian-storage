@@ -17,4 +17,4 @@ gcloud config set project rackian-cloud-1
 gcloud config set compute/zone europe-west1-b
 
 # Authenticate kubectl using gcloud
-gcloud container clusters get-credentials rackian-cluster
+gcloud container clusters get-credentials rackian-cloud-cluster
