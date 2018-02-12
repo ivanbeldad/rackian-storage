@@ -2,16 +2,28 @@ const app = require('express')()
 const bodyParser = require('body-parser')
 const logger = require('./utils/logger')
 
+let myServer = null
+
 const server = {
   start: () => {
     const port = process.env.PORT || 10001
     app.use(bodyParser.json())
-    app.listen(port, () => logger.info(`Server listening on port ${port}`))
+    myServer = app.listen(port, () => logger.info(`Server listening on port ${port}`))
+    return myServer
   },
 
-  stop: () => {
-    logger.info(`Server stopped`)
-    process.exit(0)
+  stop: async () => {
+    logger.info('Stopping server...')
+    if (!myServer) {
+      logger.warn('Trying to stop server, but it had not been started')
+      return
+    }
+    return new Promise(resolve => {
+      myServer.close(() => {
+        logger.info('Server stopped')
+        resolve()
+      })
+    })
   }
 }
 

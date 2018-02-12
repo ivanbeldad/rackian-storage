@@ -10,4 +10,4 @@ RUN npm install --production --silent
 
 EXPOSE 10001
 
-CMD [ "npm", "start" ]
+CMD [ "node", "src/main.js" ]

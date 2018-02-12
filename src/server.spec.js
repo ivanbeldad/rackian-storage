@@ -3,9 +3,12 @@ require('jest')
 jest.mock('./utils/db.js', () => {
   return {}
 })
+const myServer = {
+  close: jest.fn()
+}
 const app = {
   use: jest.fn(),
-  listen: jest.fn()
+  listen: jest.fn(() => myServer)
 }
 jest.doMock('express', () => {
   return () => {
@@ -32,6 +35,6 @@ describe('Server', () => {
   it('Stop should close application', async () => {
     process.exit = jest.fn()
     server.stop()
-    expect(process.exit).toBeCalledWith(0)
+    expect(myServer.close).toHaveBeenCalledTimes(1)
   })
 })

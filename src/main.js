@@ -1,7 +1,21 @@
 require('dotenv').config()
+const logger = require('./utils/logger')
+const db = require('./utils/db')
+const server = require('./server')
 
-require('./utils/db').init()
+db.init()
 .then(() => {
-  const server = require('./server')
   server.start()
+})
+
+process.on('SIGTERM', () => {
+  logger.info('Closing gracefully...')
+  Promise.all([
+    server.stop(),
+    db.close()
+  ])
+  .then(() => {
+    logger.info('Application finished')
+    process.exit(0)
+  })
 })
