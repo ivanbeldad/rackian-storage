@@ -25,7 +25,7 @@ const userService = {
    */
   validate: async (username, password) => {
     const user = await getUser(username)
-    if (!user) return false
+    if (!user) return null
     const isValid = await user.isValid(password)
     logger.debug(`${username} password validation ${isValid ? 'valid' : 'invalid'}`)
     return isValid ? user : null

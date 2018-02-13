@@ -11,14 +11,14 @@ jest.doMock('../utils/db', () => {
   return {
     load: () => {
       return {
-        findOne: (username) => {
-          if (username) {
+        findOne: ({ username }) => {
+          if (username === user) {
             return {
               username: 'username',
               password: 'testpass'
             }
           }
-          return null
+          return {}
         }
       }
     }
@@ -35,8 +35,13 @@ describe('User service', () => {
     expect(result.username).toBe(user)
   })
 
-  it('Validate should return null is the user is invalid', async () => {
+  it('Validate should return null if the user password is invalid', async () => {
     const result = await userService.validate(user, 'another')
+    expect(result).toBeNull()
+  })
+
+  it('Validate should return null if user does not exists', async () => {
+    const result = await userService.validate('null', 'another')
     expect(result).toBeNull()
   })
 })
