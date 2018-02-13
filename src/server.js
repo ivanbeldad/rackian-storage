@@ -1,6 +1,7 @@
 const app = require('express')()
 const bodyParser = require('body-parser')
 const logger = require('./utils/logger')
+const router = require('./router')
 
 let myServer = null
 
@@ -8,6 +9,7 @@ const server = {
   start: () => {
     const port = process.env.PORT || 10001
     app.use(bodyParser.json())
+    app.use(router)
     myServer = app.listen(port, () => logger.info(`Server listening on port ${port}`))
     return myServer
   },
