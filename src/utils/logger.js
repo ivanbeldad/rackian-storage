@@ -5,7 +5,13 @@ const loggers = {
   production: new winston.Logger({
     level: 'info',
     timestamp: true,
-    transports: [ new winston.transports.Console() ]
+    transports: [
+      new winston.transports.Console({
+        timestamp: true,
+        prettyPrint: true,
+        colorize: true
+      })
+    ]
   }),
 
   development: new winston.Logger({
