@@ -26,12 +26,19 @@ const init = async () => {
 }
 
 const connect = async () => {
-  const myClient = await MongoClient.connect(process.env.DB_URI)
-  const myDb = myClient.db(process.env.DB_NAME)
-  logger.info(`Database ${process.env.DB_NAME} loaded`)
-  db = myDb
-  client = myClient
-  return db
+  if (!process.env.DB_URI) {
+    logger.error('The environment variable DB_URI must be setted')
+  }
+  try {
+    const myClient = await MongoClient.connect(process.env.DB_URI)
+    const myDb = myClient.db(process.env.DB_NAME)
+    logger.info(`Database ${process.env.DB_NAME} loaded`)
+    db = myDb
+    client = myClient
+    return db
+  } catch (err) {
+    logger.error(err.message)
+  }
 }
 
 const close = async () => {
