@@ -2,7 +2,7 @@ FROM node:8.9
 
 LABEL maintainer="Ivan de la Beldad Fernandez <ivandelabeldad@gmail.com>"
 
-ADD . /app
+COPY . /app
 
 WORKDIR /app
 
