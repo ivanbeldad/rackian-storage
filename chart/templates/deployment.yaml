@@ -1,51 +1,28 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "chart.fullname" . }}
+  name: api-staging
+  namespace: rackian-cloud
   labels:
-    app: {{ template "chart.name" . }}
-    chart: {{ template "chart.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    app: api
+    enviroment: staging
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 3
   selector:
     matchLabels:
-      app: {{ template "chart.name" . }}
-      release: {{ .Release.Name }}
+      app: api-staging
   template:
     metadata:
       labels:
-        app: {{ template "chart.name" . }}
-        release: {{ .Release.Name }}
+        app: api-staging
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-{{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
-      nodeSelector:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-{{ toYaml . | indent 8 }}
-    {{- end }}
+      - name: rackian-api
+        image: ivandelabeldad/rackian-api
+        ports:
+        - containerPort: 1001
+        envFrom:
+          - secretRef:
+            name: api-staging-env
+          - configmapRef:
+            name: api-staging-env
