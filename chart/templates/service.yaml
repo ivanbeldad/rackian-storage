@@ -1,19 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "chart.fullname" . }}
+  name: api-staging
+  namespace: rackian-cloud
   labels:
-    app: {{ template "chart.name" . }}
-    chart: {{ template "chart.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    app: api
+    enviroment: staging
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
   selector:
-    app: {{ template "chart.name" . }}
-    release: {{ .Release.Name }}
+    app: api-staging
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 10001
+  type: NodePort
