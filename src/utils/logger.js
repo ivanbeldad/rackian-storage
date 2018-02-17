@@ -14,6 +14,18 @@ const loggers = {
     ]
   }),
 
+  staging: new winston.Logger({
+    level: 'verbose',
+    timestamp: true,
+    transports: [
+      new winston.transports.Console({
+        timestamp: true,
+        prettyPrint: true,
+        colorize: true
+      })
+    ]
+  }),
+
   development: new winston.Logger({
     level: 'verbose',
     timestamp: true,
