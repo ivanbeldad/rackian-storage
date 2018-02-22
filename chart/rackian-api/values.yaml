@@ -5,11 +5,16 @@ environment: production
 deployment:
   name: api
   replicas: 3
+  containerPort: 10001
+  image: ivandelabeldad/rackian-api
+  imageVersion: latest
 
 service:
   name: api
   port: 80
-  targetPort: 10001
 
 configmap:
+  name: api-env
+
+secret:
   name: api-env

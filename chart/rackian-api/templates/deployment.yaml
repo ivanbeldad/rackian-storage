@@ -18,25 +18,25 @@ spec:
           checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
-      - name: rackian-api
-        image: ivandelabeldad/rackian-api
+      - name: {{ .Values.deployment.name }}
+        image: {{ .Values.deployment.image }}:{{ .Values.deployment.imageVersion }}
         ports:
-        - containerPort: 10001
+        - containerPort: {{ .Values.deployment.containerPort }}
         envFrom:
           - secretRef:
-            name: api-env
+            name: {{ .Values.secret.name }}
           - configMapRef:
-              name: api-env
+              name: {{ .Values.configmap.name }}
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 10001
+            port: {{ .Values.deployment.containerPort }}
           initialDelaySeconds: 10
           periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 10001
+            port: {{ .Values.deployment.containerPort }}
           initialDelaySeconds: 10
           periodSeconds: 10
         securityContext:
