@@ -1,0 +1,15 @@
+app: api
+
+environment: production
+
+deployment:
+  name: api
+  replicas: 3
+
+service:
+  name: api
+  port: 80
+  targetPort: 10001
+
+configmap:
+  name: api-env

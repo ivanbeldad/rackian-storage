@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: {{ .Values.app }}
+    enviroment: {{ .Values.environment }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app }}
+        annotations:
+          checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: rackian-api
+        image: ivandelabeldad/rackian-api
+        ports:
+        - containerPort: 10001
+        envFrom:
+          - secretRef:
+            name: api-env
+          - configMapRef:
+              name: api-env
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 10001
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 10001
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - SYS_ADMIN
+        lifecycle:
+          postStart:
+            exec:
+              command: ["gcsfuse", "rackian-cloud-storage", "/storage"]
+          preStop:
+            exec:
+              command: ["fusermount", "-u", "/storage"]
