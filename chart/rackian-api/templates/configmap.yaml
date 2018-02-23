@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.configmap.name }}
   labels:
     app: {{ .Values.app }}
-    enviroment: {{ .Values.environment }}
+    environment: {{ .Values.environment }}
 data:
   NODE_ENV: "production"
   PORT: "10001"
