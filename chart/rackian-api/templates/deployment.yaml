@@ -37,15 +37,3 @@ spec:
             port: {{ .Values.deployment.containerPort }}
           initialDelaySeconds: 10
           periodSeconds: 10
-        securityContext:
-          privileged: true
-          capabilities:
-            add:
-              - SYS_ADMIN
-        lifecycle:
-          postStart:
-            exec:
-              command: ["gcsfuse", "rackian-cloud-storage", "/storage"]
-          preStop:
-            exec:
-              command: ["fusermount", "-u", "/storage"]
