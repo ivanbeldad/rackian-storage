@@ -14,8 +14,16 @@ service:
   name: api
   port: 80
 
-configmap:
+configMap:
   name: api-env
+  data:
+    NODE_ENV: production
+    PORT: 10001
+    PAGE_SIZE_DEFAULT: 20
+    PAGE_SIZE_MAX: 100
+    DB_NAME: rackianCloudStaging
+    STORAGE_BUCKET_NAME: rackian-cloud-storage
 
 secret:
   name: api-env
+  data:

@@ -62,3 +62,5 @@ typings/
 # Secrets
 **/*secret*
 !**/*.enc
+!chart/rackian-api/templates/secret.yaml
+!**/*example*

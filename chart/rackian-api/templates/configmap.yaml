@@ -1,13 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.configmap.name }}
+  name: {{ .Values.configMap.name }}
   labels:
     app: {{ .Values.app }}
     environment: {{ .Values.environment }}
 data:
-  NODE_ENV: "production"
-  PORT: "10001"
-  PAGE_SIZE_DEFAULT: "20"
-  PAGE_SIZE_MAX: "100"
-  DB_NAME: "rackianCloudStaging"
+  {{- range $key, $value := .Values.configMap.data }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
