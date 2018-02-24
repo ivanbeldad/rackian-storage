@@ -1,7 +1,6 @@
 #!/bin/bash
 
-if [ -n "$TRAVIS_TAG" ]
-then
+if [ -n "$TRAVIS_TAG" ]; then
   ENVIRONMENT="production"
   VERSION="$TRAVIS_TAG"
 else
@@ -9,12 +8,18 @@ else
   VERSION="latest"
 fi
 
+if [ -n "$TRAVIS_BUILD_DIR" ]; then
+  BUILD_DIR="$TRAVIS_BUILD_DIR"
+else
+  BUILD_DIR="$PWD"
+fi
+
 NAMESPACE="rackian-cloud"
 
 CONTAINER=ivandelabeldad/rackian-api
 CONTAINER_TAG="$CONTAINER:$VERSION"
 
-CHART_DIR=$TRAVIS_BUILD_DIR/chart/rackian-api
+CHART_DIR="$BUILD_DIR/chart/rackian-api"
 SECRET_PATH="$CHART_DIR/values.secret.yaml"
 SECRET_PATH_STAGING="$CHART_DIR/values.secret.staging.yaml"
 
@@ -32,8 +37,6 @@ function staging {
   RELEASE_NAME=rackian-api-staging
   # set value files
   VALUES=$CHART_DIR/values.staging.yaml,$SECRET_PATH_STAGING
-  # set runtime values
-  SETTED="environment=$ENVIRONMENT"
   # deploy
   deploy $RELEASE_NAME $VALUES $SETTED
 }
@@ -44,9 +47,7 @@ function production {
   # set release_name
   RELEASE_NAME=rackian-api
   # set value files
-  VALUES=$CHART_DIR/values.yaml,$SECRET_PATH
-  # set runtime values
-  SETTED="environment=$ENVIRONMENT,deployment.imageVersion=$TRAVIS_TAG"
+  VALUES="$CHART_DIR/values.yaml,$SECRET_PATH"
   # deploy
   deploy $RELEASE_NAME $VALUES $SETTED
 }
@@ -57,13 +58,15 @@ function deploy {
   # send to docker repository
   docker push $CONTAINER_TAG
 
+  SETTED="environment=$ENVIRONMENT,deployment.imageVersion=$VERSION"
+
   # deploy to kubernetes cluster
   helm upgrade $RELEASE_NAME $CHART_DIR \
     --namespace $NAMESPACE \
     --install \
     --values $VALUES \
     --set $SETTED \
-    --dry-run --debug
+    --recreate-pods
 }
 
 # check if should create staging or production

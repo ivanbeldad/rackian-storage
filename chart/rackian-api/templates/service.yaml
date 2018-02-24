@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.service.name }}
   labels:
     app: {{ .Values.app }}
-    environment: production
+    environment: {{ .Values.environment }}
 spec:
   type: NodePort
   selector:

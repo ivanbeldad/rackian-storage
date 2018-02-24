@@ -18,13 +18,14 @@ spec:
       containers:
       - name: {{ .Values.deployment.name }}
         image: {{ .Values.deployment.image }}:{{ required "The deployment MUST have an imageVersion" .Values.deployment.imageVersion }}
+        imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.deployment.containerPort }}
         envFrom:
         - secretRef:
-          name: {{ .Values.secret.name }}
+            name: {{ .Values.secret.name }}
         - configMapRef:
-          name: {{ .Values.configMap.name }}
+            name: {{ .Values.configMap.name }}
         livenessProbe:
           httpGet:
             path: /healthz

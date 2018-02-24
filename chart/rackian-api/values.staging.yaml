@@ -8,7 +8,7 @@ deployment:
 service:
   name: api-staging
 
-configmap:
+configMap:
   name: api-env-staging
 
 secret:

@@ -4,7 +4,7 @@
 BIN_DIR=${HOME}/bin
 
 # Create bin folder and add it to path
-mkdir $BIN_DIR
+mkdir $BIN_DIR -p
 export PATH=$PATH:$BIN_DIR
 
 # If the SDK is not already cached, download it and unpack it
