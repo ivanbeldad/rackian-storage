@@ -5,7 +5,7 @@ BIN_DIR=${HOME}/bin
 
 # Create bin folder and add it to path
 mkdir $BIN_DIR
-export PATH=$BIN_DIR:$PATH
+export PATH=$PATH:$BIN_DIR
 
 # If the SDK is not already cached, download it and unpack it
 if [ ! -d ${HOME}/google-cloud-sdk/bin ]
@@ -16,7 +16,13 @@ then
   source ${HOME}/google-cloud-sdk/path.bash.inc
 fi
 
+# Install gsutil
+gcloud components install gsutil
+
 # Install Kubectl
 curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.9.0/bin/linux/amd64/kubectl
 mv kubectl $BIN_DIR/
 chmod +x $BIN_DIR/kubectl
+
+# Install Helm
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash

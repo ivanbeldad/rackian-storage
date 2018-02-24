@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -z "$TRAVIS_BUILD_DIR" ]; then
+  TRAVIS_BUILD_DIR=$PWD
+fi
+
 # Credentials directory
 CREDENTIALS_DIR=${HOME}/credentials
 
