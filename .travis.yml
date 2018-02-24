@@ -41,4 +41,4 @@ after_success:
 deploy:
   skip_cleanup: true
   provider: script
-  script: chmod +x $TRAVIS_BUILD_DIR/scripts/deploy.sh && source $TRAVIS_BUILD_DIR/scripts/deploy.sh
+  script: chmod +x $TRAVIS_BUILD_DIR/scripts/deploy.sh && sh $TRAVIS_BUILD_DIR/scripts/deploy.sh
