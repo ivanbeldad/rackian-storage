@@ -32,9 +32,13 @@ install:
 
 script:
   - npm run coverage
+  - helm lint --set deployment.imageVersion=latest
 
 after_success:
   # Send coverage to codacy
   - cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage
-  # Create container
-  # - docker-compose build rackian-api
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: source $TRAVIS_BUILD_DIR/scripts/deploy.sh
