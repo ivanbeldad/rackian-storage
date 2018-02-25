@@ -18,7 +18,11 @@ jest.doMock('express', () => {
 const express = require('express')
 express.Router = jest.fn(() => {
   return {
-    use: jest.fn()
+    use: jest.fn(),
+    get: jest.fn(),
+    post: jest.fn(),
+    put: jest.fn(),
+    delete: jest.fn()
   }
 })
 jest.mock('body-parser')
