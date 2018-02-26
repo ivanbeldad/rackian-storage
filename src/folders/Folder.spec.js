@@ -5,7 +5,6 @@ const { validationResult } = require('express-validator/check')
 const Folder = require('./Folder')
 
 let req = httpMocks.createRequest()
-let next = jest.fn()
 
 beforeEach(() => {
   req.body = {
