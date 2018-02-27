@@ -29,4 +29,7 @@ class Folder {
   }
 }
 
+Folder.collection = 'folders'
+Folder.uri = '/folder'
+
 module.exports = Folder
