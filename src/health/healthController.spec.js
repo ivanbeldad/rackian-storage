@@ -13,8 +13,8 @@ describe('Health Controller', () => {
   it('Should return 200 status', () => {
     expect(res.statusCode).toBe(200)
   })
-  it('Should call end', () => {
-    healthController.get(req, res)
+  it('Should call end', async () => {
+    await healthController.get(req, res)
     expect(res.end).toHaveBeenCalledTimes(1)
   })
 })
