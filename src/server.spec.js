@@ -1,7 +1,9 @@
 require('jest')
 
 jest.mock('./utils/db.js', () => {
-  return {}
+  return {
+    load: () => jest.fn()
+  }
 })
 const myServer = {
   close: jest.fn()
