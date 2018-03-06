@@ -22,6 +22,14 @@ class Folder {
     logger.silly(`Folder ${opts.name || opts.id} created`)
   }
 
+  /**
+   * @param {[]} objArray
+   * @return {Folder[]}
+   */
+  static fromArray (objArray) {
+    return objArray.map(obj => new Folder(obj))
+  }
+
   static validation () {
     return [
       check('name').exists().not().isEmpty()

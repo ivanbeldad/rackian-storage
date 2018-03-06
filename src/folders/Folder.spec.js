@@ -34,7 +34,18 @@ describe('Folder', () => {
     expect(folder.links).toBe('links')
   })
 
-  it('Should not validate if name does not exists', () => {
+  it('FromArray should transform objects into Folders', () => {
+    const obj = {
+      name: 'folderName',
+      nonExists: 'nonExists'
+    }
+    const result = Folder.fromArray([obj])
+    expect(result.length).toBe(1)
+    expect(result[0].name).toBe('folderName')
+    expect(result[0].nonExists).toBeUndefined()
+  })
+
+  it('Validation should not validate if name does not exists', () => {
     const done = []
 
     Folder.validation().forEach(async fn => {
