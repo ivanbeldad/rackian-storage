@@ -1,6 +1,6 @@
 require('jest')
 
-const data = []
+const data = [{ name: 'nameFolder' }]
 const dbObject = {
   find: jest.fn(() => data)
 }
@@ -13,6 +13,7 @@ jest.doMock('../utils/db', () => {
 const db = require('../utils/db').load()
 const httpMocks = require('node-mocks-http')
 const folderController = require('./folderController')
+const Folder = require('./Folder')
 
 let req = httpMocks.createRequest()
 req.pagination = {
@@ -41,9 +42,14 @@ describe('Folder Controller', () => {
     await folderController.get(req, res, next)
     expect(db.find.mock.calls[0][0].filter).toHaveProperty('user', 'userid')
   })
+  it('Data result should be an array of folders', async () => {
+    await folderController.get(req, res, next)
+    expect(res.data).toBeInstanceOf(Array)
+    expect(res.data[0]).toBeInstanceOf(Folder)
+  })
   it('Get should add the data result to the response object', async () => {
     await folderController.get(req, res, next)
-    expect(res.data).toBe(data)
+    expect(res.data[0].name).toBe('nameFolder')
   })
   it('Get should call next when finished', async () => {
     await folderController.get(req, res, next)
