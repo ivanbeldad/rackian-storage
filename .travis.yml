@@ -35,7 +35,7 @@ install:
 
 script:
   - npm run coverage
-  - helm lint --set deployment.imageVersion=latest
+  - helm lint --set deployment.imageVersion=latest ./chart/rackian-api/
 
 after_success:
   # Send coverage to codacy
