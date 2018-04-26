@@ -1,8 +1,10 @@
 language: node_js
 
-# Select latest version of Node 8
+# Run tests on
 node_js:
   - "8"
+  - "9"
+  - "10"
 
 services:
   # Enable docker
@@ -12,7 +14,8 @@ addons:
   apt:
     packages:
       # Get an updated version of docker
-      - docker-ce
+      # Disable to prevent timeout on login (bug introduced on 18.04 docker-ce)
+      # - docker-ce
 
 # Cache dependencies
 cache:
