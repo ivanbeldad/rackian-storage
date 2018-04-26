@@ -60,6 +60,9 @@ function deploy {
 
   SETTED="environment=$ENVIRONMENT,deployment.imageVersion=$VERSION"
 
+  # upgrade tiller before deploy
+  helm init --upgrade
+
   # deploy to kubernetes cluster
   helm upgrade $RELEASE_NAME $CHART_DIR \
     --namespace $NAMESPACE \
