@@ -3,8 +3,8 @@ language: node_js
 # Run tests on
 node_js:
   - "8"
-  - "9"
-  - "10"
+  # - "9"
+  # - "10"
 
 services:
   # Enable docker
@@ -41,7 +41,19 @@ after_success:
   # Send coverage to codacy
   - cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage
 
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: chmod +x $TRAVIS_BUILD_DIR/scripts/deploy.sh && bash $TRAVIS_BUILD_DIR/scripts/deploy.sh
+jobs:
+  include:
+    - stage: build container
+      node_js: "8"
+      script: skip
+      deploy:
+        skip_cleanup: true
+        provider: script
+        script: chmod +x $TRAVIS_BUILD_DIR/scripts/deploy_docker.sh && bash $TRAVIS_BUILD_DIR/scripts/deploy_docker.sh
+    - stage: deploy application
+      node_js: "8"
+      script: skip
+      deploy:
+        skip_cleanup: true
+        provider: script
+        script: chmod +x $TRAVIS_BUILD_DIR/scripts/deploy_k8s.sh && bash $TRAVIS_BUILD_DIR/scripts/deploy_k8s.sh
