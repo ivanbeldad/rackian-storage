@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ -n "$TRAVIS_TAG" ]; then
+  VERSION="$TRAVIS_TAG"
+else
+  VERSION="latest"
+fi
+
 CONTAINER=ivandelabeldad/rackian-api
 CONTAINER_TAG="$CONTAINER:$VERSION"
 
