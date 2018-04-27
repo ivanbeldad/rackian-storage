@@ -22,6 +22,3 @@ gcloud config set compute/zone europe-west1-b
 
 # Authenticate kubectl using gcloud
 gcloud container clusters get-credentials rackian-cloud-cluster
-
-# Authenticate in docker hub
-docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"

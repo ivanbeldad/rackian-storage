@@ -3,8 +3,8 @@ language: node_js
 # Run tests on
 node_js:
   - "8"
-  # - "9"
-  # - "10"
+  - "9"
+  - "10"
 
 services:
   # Enable docker
@@ -14,8 +14,7 @@ addons:
   apt:
     packages:
       # Get an updated version of docker
-      # Disable to prevent timeout on login (bug introduced on 18.04 docker-ce)
-      # - docker-ce
+      - docker-ce
 
 # Cache dependencies
 cache:
@@ -23,37 +22,46 @@ cache:
     - node_modules
     - "$HOME/google-cloud-sdk/"
 
-before_install:
-  # Install gcloud and kubectl
-  - source $TRAVIS_BUILD_DIR/scripts/install.sh
-  # Auth gcloud and kubectl
-  - source $TRAVIS_BUILD_DIR/scripts/credentials.sh
-
 install:
   - npm install
-  - npm install --save codacy-coverage
 
-script:
-  - npm run coverage
-  - helm lint --set deployment.imageVersion=latest ./chart/rackian-api/
-
-after_success:
-  # Send coverage to codacy
-  - cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage
+stages:
+  - test
+  - upload coverage
+  - build and push container
+  - lint chart
+  - deploy application
 
 jobs:
   include:
-    - stage: build container
+    - stage: upload coverage
       node_js: "8"
-      script: skip
-      deploy:
-        skip_cleanup: true
-        provider: script
-        script: chmod +x $TRAVIS_BUILD_DIR/scripts/deploy_docker.sh && bash $TRAVIS_BUILD_DIR/scripts/deploy_docker.sh
+      script:
+      - npm install --save codacy-coverage
+      - npm run coverage
+      - cat coverage/lcov.info | ./node_modules/.bin/codacy-coverage
+
+    - stage: build and push container
+      node_js: "8"
+      install: skip
+      script:
+      - chmod +x $TRAVIS_BUILD_DIR/scripts/build_container.sh
+      - bash $TRAVIS_BUILD_DIR/scripts/build_container.sh
+
+    - stage: lint chart
+      node_js: "8"
+      install: skip
+      script:
+      - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+      - helm lint --set deployment.imageVersion=latest ./chart/rackian-api/
+
     - stage: deploy application
       node_js: "8"
       script: skip
+      install: skip
       deploy:
         skip_cleanup: true
         provider: script
-        script: chmod +x $TRAVIS_BUILD_DIR/scripts/deploy_k8s.sh && bash $TRAVIS_BUILD_DIR/scripts/deploy_k8s.sh
+        script:
+        - chmod +x $TRAVIS_BUILD_DIR/scripts/deploy_cluster.sh
+        - bash $TRAVIS_BUILD_DIR/scripts/deploy_cluster.sh
