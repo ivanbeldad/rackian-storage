@@ -9,7 +9,7 @@ const server = {
   start: () => {
     const port = process.env.PORT || 10001
     app.use(bodyParser.json())
-    app.use(router)
+    router.enroute(app)
     myServer = app.listen(port, () => logger.info(`Server listening on port ${port}`))
     return myServer
   },

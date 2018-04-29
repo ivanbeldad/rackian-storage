@@ -1,15 +1,24 @@
-const router = require('express').Router()
+const express = require('express')
 const authMiddleware = require('./middlewares/authMiddleware')
 const healthController = require('./health/healthController')
+const healthRouter = express.Router()
+
 const folderController = require('./folders/folderController')
 const Folder = require('./folders/Folder')
+const folderRouter = express.Router()
 
-router.get('/healthz', healthController.get)
+healthRouter.get(healthController.get)
 
-router.get(Folder.uri, authMiddleware, folderController.get)
-router.get(`${Folder.uri}/:id`, authMiddleware, folderController.getById)
-router.post(Folder.uri, authMiddleware, Folder.validation(), folderController.post)
-router.put(`${Folder.uri}/:id`, Folder.validation(), authMiddleware, folderController.put)
-router.delete(`${Folder.uri}/:id`, authMiddleware, folderController.del)
+folderRouter.use(authMiddleware)
+folderRouter.get(folderController.get)
+folderRouter.get('/:id', folderController.getById)
+folderRouter.post(Folder.validation(), folderController.post)
+folderRouter.put('/:id', Folder.validation(), folderController.put)
+folderRouter.delete('/:id', folderController.del)
 
-module.exports = router
+module.exports = {
+  enroute: (app) => {
+    app.use('/healthz', healthRouter)
+    app.use(Folder.uri, folderRouter)
+  }
+}
