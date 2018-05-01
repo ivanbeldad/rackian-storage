@@ -1,6 +1,6 @@
 const Pagination = require('./Pagination')
 
-module.exports = (req, res, next) => {
+const paginate = (req, res, next) => {
   /** @type {Pagination} */
   req.pagination = new Pagination({
     page: req.query.page,
@@ -8,3 +8,11 @@ module.exports = (req, res, next) => {
   })
   next()
 }
+
+const process = (req, res, next) => {
+  if (req.pagination === undefined) return next()
+  res.setHeader('Link', 'rel')
+  next()
+}
+
+module.exports = { paginate, process }
