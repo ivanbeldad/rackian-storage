@@ -38,6 +38,6 @@ class Folder {
 }
 
 Folder.collection = 'folders'
-Folder.uri = '/folder'
+Folder.uri = '/folders'
 
 module.exports = Folder
