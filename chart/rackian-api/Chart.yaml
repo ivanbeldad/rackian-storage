@@ -1,5 +1,0 @@
-apiVersion: v1
-description: File sync and share cloud API
-name: rackian-storage
-version: 0.0.1
-icon: https://storage.googleapis.com/rackian-cloud/storage/logo.png

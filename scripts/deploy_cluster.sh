@@ -77,17 +77,17 @@ fi
 
 # Set variables
 NAMESPACE="rackian-cloud"
-CHART_DIR="$BUILD_DIR/chart/rackian-api"
+CHART_DIR="$BUILD_DIR/chart/rackian-storage"
 GCS_PROTOCOL="gs"
 GCS_BUCKET="rackian-cloud"
 
 if [ $ENVIRONMENT = "production" ]; then
-  RELEASE_NAME="rackian-api"
+  RELEASE_NAME="rackian-storage"
   SECRET_PATH="$CHART_DIR/values.secret.yaml"
   GCS_SECRET="storage/values.secret.yaml"
   GCS_SECRET_PATH="$GCS_PROTOCOL://$GCS_BUCKET/$GCS_SECRET"
 else
-  RELEASE_NAME="rackian-api-staging"
+  RELEASE_NAME="rackian-storage-staging"
   SECRET_PATH="$CHART_DIR/values.secret.staging.yaml"
   GCS_SECRET="storage/values.secret.staging.yaml"
   GCS_SECRET_PATH="$GCS_PROTOCOL://$GCS_BUCKET/$GCS_SECRET"

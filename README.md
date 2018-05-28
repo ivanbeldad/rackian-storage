@@ -8,7 +8,7 @@ File sync and share cloud API
 
 [![Travis](https://img.shields.io/travis/ivandelabeldad/rackian-storage.svg?style=flat-square)](https://travis-ci.org/ivandelabeldad/rackian-storage)
 [![CircleCI](https://img.shields.io/circleci/project/github/ivandelabeldad/rackian-storage.svg?style=flat-square)](https://circleci.com/gh/ivandelabeldad/rackian-storage)
-[![Docker Build Status](https://img.shields.io/docker/build/ivandelabeldad/travis-cli.svg?style=flat-square)](https://hub.docker.com/r/ivandelabeldad/rackian-storage/)
+[![Docker Build Status](https://img.shields.io/docker/build/ivandelabeldad/rackian-storage.svg?style=flat-square)](https://hub.docker.com/r/ivandelabeldad/rackian-storage/)
 [![Docker Automated build](https://img.shields.io/docker/automated/ivandelabeldad/rackian-storage.svg?style=flat-square)](https://hub.docker.com/r/ivandelabeldad/rackian-storage/)
 [![Known Vulnerabilities](https://snyk.io/test/github/ivandelabeldad/rackian-storage/badge.svg?targetFile=package.json&style=flat-square)](https://snyk.io/test/github/ivandelabeldad/rackian-storage?targetFile=package.json)
 [![Version](https://img.shields.io/badge/version-0.0.1-orange.svg?style=flat-square)](https://github.com/ivandelabeldad/rackian-storage)
