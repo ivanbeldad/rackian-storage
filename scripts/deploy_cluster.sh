@@ -84,12 +84,12 @@ GCS_BUCKET="rackian-cloud"
 if [ $ENVIRONMENT = "production" ]; then
   RELEASE_NAME="rackian-api"
   SECRET_PATH="$CHART_DIR/values.secret.yaml"
-  GCS_SECRET="values.secret.yaml"
+  GCS_SECRET="storage/values.secret.yaml"
   GCS_SECRET_PATH="$GCS_PROTOCOL://$GCS_BUCKET/$GCS_SECRET"
 else
   RELEASE_NAME="rackian-api-staging"
   SECRET_PATH="$CHART_DIR/values.secret.staging.yaml"
-  GCS_SECRET="values.secret.staging.yaml"
+  GCS_SECRET="storage/values.secret.staging.yaml"
   GCS_SECRET_PATH="$GCS_PROTOCOL://$GCS_BUCKET/$GCS_SECRET"
 fi
 
