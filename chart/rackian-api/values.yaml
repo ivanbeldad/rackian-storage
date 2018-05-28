@@ -6,16 +6,16 @@ deployment:
   name: api
   replicas: 3
   containerPort: 10001
-  image: ivandelabeldad/rackian-api
+  image: ivandelabeldad/rackian-storage
   # force to set imageVersion at runtime
   # imageVersion: latest
 
 service:
-  name: api
+  name: storage
   port: 80
 
 configMap:
-  name: api-env
+  name: storage-env
   data:
     NODE_ENV: production
     PORT: 10001
@@ -25,4 +25,4 @@ configMap:
     STORAGE_BUCKET_NAME: rackian-cloud-storage
 
 secret:
-  name: api-env
+  name: storage-env

@@ -33,5 +33,5 @@ The purpose of this application is to put into practice the following techniques
 
 ## License
 
-The API Rackian is open-sourced software licensed under
+Rackian Storage is open-sourced software licensed under
 the [MIT license](https://github.com/ivandelabeldad/rackian-api/blob/master/LICENSE).

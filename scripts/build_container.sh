@@ -6,7 +6,7 @@ else
   VERSION="latest"
 fi
 
-CONTAINER=ivandelabeldad/rackian-api
+CONTAINER=ivandelabeldad/rackian-storage
 CONTAINER_TAG="$CONTAINER:$VERSION"
 
 # Authenticate in docker hub
