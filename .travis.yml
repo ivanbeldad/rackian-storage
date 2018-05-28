@@ -50,7 +50,7 @@ jobs:
       install: skip
       script:
       - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-      - helm lint --set deployment.imageVersion=latest ./chart/rackian-api/
+      - helm lint --set deployment.imageVersion=latest ./chart/rackian-storage/
 
     - stage: deploy application
       node_js: "8"
