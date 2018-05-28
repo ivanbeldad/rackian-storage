@@ -1,0 +1,28 @@
+app: api
+
+environment: production
+
+deployment:
+  name: api
+  replicas: 3
+  containerPort: 10001
+  image: ivandelabeldad/rackian-storage
+  # force to set imageVersion at runtime
+  # imageVersion: latest
+
+service:
+  name: storage
+  port: 80
+
+configMap:
+  name: storage-env
+  data:
+    NODE_ENV: production
+    PORT: 10001
+    PAGE_SIZE_DEFAULT: 20
+    PAGE_SIZE_MAX: 100
+    DB_NAME: rackianCloudStaging
+    STORAGE_BUCKET_NAME: rackian-cloud-storage
+
+secret:
+  name: storage-env
