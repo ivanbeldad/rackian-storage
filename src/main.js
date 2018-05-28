@@ -4,9 +4,9 @@ const db = require('./utils/db')
 const server = require('./server')
 
 db.init()
-.then(() => {
-  server.start()
-})
+  .then(() => {
+    server.start()
+  })
 
 process.on('SIGTERM', () => {
   logger.info('Closing gracefully...')
@@ -14,8 +14,8 @@ process.on('SIGTERM', () => {
     server.stop(),
     db.close()
   ])
-  .then(() => {
-    logger.info('Application finished')
-    process.exit(0)
-  })
+    .then(() => {
+      logger.info('Application finished')
+      process.exit(0)
+    })
 })

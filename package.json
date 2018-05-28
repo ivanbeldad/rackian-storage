@@ -26,11 +26,11 @@
   },
   "homepage": "https://github.com/ivandelabeldad/rackian-storage#readme",
   "devDependencies": {
-    "jest": "^22.4.4",
+    "jest": "^23.0.1",
     "nock": "^9.2.6",
     "node-mocks-http": "^1.7.0",
     "nodemon": "^1.17.5",
-    "standard": "^10.0.3"
+    "standard": "^11.0.1"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
@@ -38,7 +38,7 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-validator": "^5.2.0",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^6.0.1",
     "mongodb": "^3.0.8",
     "winston": "^2.4.2"
   },
