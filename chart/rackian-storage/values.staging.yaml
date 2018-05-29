@@ -1,15 +1,15 @@
 environment: staging
 
 deployment:
-  name: api-staging
+  name: storage-staging
   replicas: 1
   imageVersion: latest
 
 service:
-  name: api-staging
+  name: storage-staging
 
 configMap:
-  name: api-env-staging
+  name: storage-env-staging
 
 secret:
-  name: api-env-staging
+  name: storage-env-staging

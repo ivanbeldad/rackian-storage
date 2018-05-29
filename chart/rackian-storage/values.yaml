@@ -1,9 +1,9 @@
-app: api
+app: storage
 
 environment: production
 
 deployment:
-  name: api
+  name: storage
   replicas: 3
   containerPort: 10001
   image: ivandelabeldad/rackian-storage
