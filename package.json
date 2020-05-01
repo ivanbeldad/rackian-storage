@@ -8,7 +8,9 @@
     "watch": "nodemon",
     "test": "standard && jest",
     "watchtest": "jest --watch",
-    "coverage": "standard && jest --coverage"
+    "coverage": "standard && jest --coverage",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -40,11 +42,13 @@
     "express-validator": "^5.2.0",
     "fs-extra": "^6.0.1",
     "mongodb": "^3.0.8",
-    "winston": "^2.4.2"
+    "winston": "^2.4.2",
+    "snyk": "^1.316.1"
   },
   "standard": {
     "env": [
       "jest"
     ]
-  }
+  },
+  "snyk": true
 }
